@@ -29,15 +29,7 @@ public class FlightDetails {
 	private Integer status;
 
 
-	/*
-	 * public FlightDetails(Integer id,Integer flight_number, String flight_name,
-	 * String source, String destination, LocalDateTime departure_time,
-	 * LocalDateTime arrival_time, double bussiness_fare) { super(); this.id = id;
-	 * this.flight_number = flight_number; this.flight_name = flight_name;
-	 * this.source = source; this.destination = destination; this.departure_time =
-	 * departure_time; this.arrival_time = arrival_time; this.bussiness_fare =
-	 * bussiness_fare; }
-	 */
+	 
 	
 	public FlightDetails(Integer flight_number, String flight_name, String source, String destination,
 			LocalDateTime departure_time, LocalDateTime arrival_time, Integer bussiness_seat, Integer nonbussiness_seat,

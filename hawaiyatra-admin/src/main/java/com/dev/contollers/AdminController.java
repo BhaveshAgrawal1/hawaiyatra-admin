@@ -11,21 +11,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dev.client.PassangerController;
 import com.dev.exception.AdminException;
 import com.dev.model.BookingSeats;
 import com.dev.model.FlightDetails;
 import com.dev.model.SearchDetails;
 import com.dev.model.SearchResponse;
+import com.dev.model.StatusUpdate;
 import com.dev.services.FlightService;
 
 @RestController
 @RequestMapping("/flight")
 public class AdminController {
 	
+	
 	@Autowired
 	private FlightService service;
 	
-	@GetMapping("/search")
+	@PostMapping("/search")
 	public Map<String,List<SearchResponse>> searchFlight(@RequestBody SearchDetails details) throws AdminException{
 		return service.searchFlightDetails(details);
 	}
@@ -56,12 +59,12 @@ public class AdminController {
 	}
 	
 	@PutMapping("/block")
-	public String blockFlight(@RequestBody FlightDetails details) throws AdminException{
+	public String blockFlight(@RequestBody StatusUpdate details) throws AdminException{
 		return service.blockFlight(details);
 	}
 	
 	@PutMapping("/unblock")
-	public String unblockFlight(@RequestBody FlightDetails details) throws AdminException{
+	public String unblockFlight(@RequestBody StatusUpdate details) throws AdminException{
 		return service.unblockFlight(details);
 	}
 
