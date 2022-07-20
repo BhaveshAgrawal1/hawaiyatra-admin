@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.dev.client.PassangerController;
@@ -19,6 +20,8 @@ public class FlightService {
 
 	@Autowired
 	private PassangerController passanger;
+	
+	private static final String TOPIC = "kafka-topic";
 
 	@Autowired
 	private FlightRepositories repo;
@@ -95,7 +98,8 @@ public class FlightService {
 		}
 		throw new AdminException("Incorrect value recived");
 	}
-
+	
+	@KafkaListener(topics = TOPIC, groupId="group_id", containerFactory = "userKafkaListenerFactory")
 	public void updateSeat(BookingSeats details) {
 		Optional<FlightDetails> optional = repo.findById(details.getFlight_id());
 		if (optional.isPresent()) {
