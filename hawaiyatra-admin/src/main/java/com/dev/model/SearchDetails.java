@@ -11,8 +11,6 @@ public class SearchDetails {
 	private Integer seat;
 	private String class_type;
 	private boolean return_trip = false;
-	private String return_source;
-	private String return_destination;
 	private LocalDate return_date;
 	
 	
@@ -33,31 +31,6 @@ public class SearchDetails {
 	public void setReturn_trip(boolean return_trip) {
 		this.return_trip = return_trip;
 	}
-
-
-
-	public String getReturn_source() {
-		return return_source;
-	}
-
-
-
-	public void setReturn_source(String return_source) {
-		this.return_source = return_source;
-	}
-
-
-
-	public String getReturn_destination() {
-		return return_destination;
-	}
-
-
-
-	public void setReturn_destination(String return_destination) {
-		this.return_destination = return_destination;
-	}
-
 
 
 	public LocalDate getReturn_date() {

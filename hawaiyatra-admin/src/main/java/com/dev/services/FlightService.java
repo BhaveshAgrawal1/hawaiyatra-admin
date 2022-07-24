@@ -54,7 +54,6 @@ public class FlightService {
 		} else {
 			if (details.getSource() != null && details.getDestination() != null && details.getJourney_date() != null
 					&& details.getSeat() != null && details.getClass_type() != null && details.getSeat() != 0
-					&& details.getReturn_destination() != null && details.getReturn_source() != null
 					&& details.getReturn_date() != null) {
 				Map<String, List<SearchResponse>> map = new HashMap<>();
 				if (details.getClass_type().equalsIgnoreCase("bussiness")) {
@@ -62,8 +61,8 @@ public class FlightService {
 					List<SearchResponse> response = repo.searchBusFlight(details.getSource(), details.getDestination(),
 							details.getJourney_date(), details.getSeat());
 					map.put("OneWay", response);
-					List<SearchResponse> response1 = repo.searchBusReFlight(details.getReturn_source(),
-							details.getReturn_destination(), details.getReturn_date(), details.getSeat());
+					List<SearchResponse> response1 = repo.searchBusFlight(details.getDestination(),
+							details.getSource(), details.getReturn_date(), details.getSeat());
 					map.put("TwoWay", response1);
 					return map;
 				} else if (details.getClass_type().equalsIgnoreCase("nonbussiness")) {
@@ -71,8 +70,8 @@ public class FlightService {
 					List<SearchResponse> response = repo.searchNonBusFlight(details.getSource(),
 							details.getDestination(), details.getJourney_date(), details.getSeat());
 					map.put("OneWay", response);
-					List<SearchResponse> response1 = repo.searchNonBusReFlight(details.getReturn_source(),
-							details.getReturn_destination(), details.getReturn_date(), details.getSeat());
+					List<SearchResponse> response1 = repo.searchNonBusFlight(details.getDestination(),
+							details.getSource(), details.getReturn_date(), details.getSeat());
 					map.put("TwoWay", response1);
 					return map;
 				}
