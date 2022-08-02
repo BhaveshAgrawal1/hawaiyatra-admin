@@ -213,6 +213,7 @@ public class FlightService {
 			Optional<FlightDetails> optional = repo.findById(details.getFlight_id());
 			if (optional.isPresent()) {
 				FlightDetails flight = optional.get();
+				if(flight.getStatus() == 1) {
 				LocalDateTime modifydate = LocalDateTime.now();
 				flight.setModify_date(modifydate);
 				flight.setStatus(0);
@@ -221,6 +222,10 @@ public class FlightService {
 				details.setComment("Flight is cancelled.Sorry for the inconvince");
 				passanger.blockticket(details);
 				return "Flight id:- " + details.getFlight_id() + " is blocked";
+				}
+				else {
+					return "Flight id:- " + details.getFlight_id() + " is already in Cancelled state";
+				}
 			} else {
 				throw new AdminException("Flight id:- " + details.getFlight_id() + " is not present");
 			}
@@ -233,12 +238,17 @@ public class FlightService {
 			Optional<FlightDetails> optional = repo.findById(details.getFlight_id());
 			if (optional.isPresent()) {
 				FlightDetails flight = optional.get();
+				if(flight.getStatus() == 0) {
 				LocalDateTime modifydate = LocalDateTime.now();
 				flight.setModify_date(modifydate);
 				flight.setStatus(1);
 				flight.setComment(details.getComment());
 				FlightDetails flight1 = repo.save(flight);
 				return "Flight id:- " + details.getFlight_id() + " is unblocked";
+				}
+				else {
+					return "Flight id:- " + details.getFlight_id() + " is already in active state";
+				}
 			} else {
 				throw new AdminException("Flight id:- " + details.getFlight_id() + " is not present");
 			}
